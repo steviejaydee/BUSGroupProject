@@ -23,6 +23,7 @@ def index():
     #Check user is logged in
     if 'email' not in session:
         return redirect(url_for('login'))
+    flash(f"You have successfully logged in. Your session will be remembered for 1 year.")
     return render_template('index.html', first_name = session.get('first_name', 'Student'))
 
 @app.route('/login', methods = ['GET', 'POST'])
@@ -55,3 +56,4 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
