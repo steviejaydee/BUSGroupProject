@@ -57,3 +57,19 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
+@app.route('/triage')
+def triage():
+    pass
+
+@app.route('/meditation')
+def meditation():
+    pass
+
+@app.route('/resources')
+def resources():
+    pass
+
+@app.route('/emergency')
+def emergency():
+    pass
+
