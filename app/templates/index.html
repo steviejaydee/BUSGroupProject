@@ -5,9 +5,15 @@
 </head>
 <body>
     <h1>Welcome, {{ first_name }}!</h1>
-    
-    <p>You have successfully logged in. Your session will be remembered for 1 year.</p>
-    <p>Note to group - this is the home page, you guys should add the UI and other stuff here. Delete this when youre all done with our UI sprint stuff!</p>
+    <p>What can we do for you?</p>
+    <ul>
+        <li><a href="{{ url_for('meditation') }}">Guided Meditation</a></li>
+        <li><a href="{{ url_for('triage') }}">Get Councilling Support</a></li>
+        <li><a href="{{ url_for('resources') }}">Browse Offline Help</a></li>
+        <li><a href="https://intranet.birmingham.ac.uk/student/your-wellbeing/mental-health/index.aspx">Online Resources</a></li>
+        <li><a href="{{ url_for('emergency') }}">Emergency Resources</a></li>
+        
+    </ul>
     <a href="{{ url_for('logout') }}", onclick="return confirm('Are you sure you want to log out?');">
         <button>Log Out</button>
     </a>
