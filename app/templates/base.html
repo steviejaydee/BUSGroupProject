@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}"
 </head>
 <body>
+    {% block title%}<title>Default</title>{% endblock %}
     {% block content %}
     {% endblock %}
     <footer>
