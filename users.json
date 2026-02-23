@@ -1,0 +1,17 @@
+[
+    {
+        "first_name": "Alice",
+        "email": "axb3759@bham.ac.uk",
+        "password": "password123"
+    },
+    {
+        "first_name": "Bob",
+        "email": "bxs7290@bham.ac.uk",
+        "password": "securepass"
+    },
+    {
+        "first_name": "Charlie",
+        "email": "cxp1296@bham.ac.uk",
+        "password": "bham2026"
+    }
+]
