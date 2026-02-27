@@ -78,7 +78,7 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-@app.route('/triage')
+@app.route('/triage', methods=["GET", "POST")
 def triage():
     form = TriageForm()
     if form.validate_on_submit():
@@ -86,13 +86,17 @@ def triage():
         return redirect(url_for("index"))
     return render_template("triage.html", form = form)
 
-@app.route('/meditation')
+@app.route('/meditation', methods=["GET", "POST")
 def meditation():
     meditations_filepath = os.path.join(current_app.root_path, "static", "meditations")
     soundscapes_filepath = os.path.join(current_app.root_path, "static", "soundscapes")
     meditations = os.listdir(meditations_filepath)
     soundscapes = os.listdir(soundscapes_filepath)
-    return render_template("meditation.html", meditations = meditations, soundscapes = soundscapes)
+    return render_template("meditation.html", 
+                           meditations = meditations, 
+                           soundscapes = soundscapes, 
+                           meditations_filepath = meditations_filepath, 
+                           soundscapes_filepath = soundscapes_filepath)
 
 @app.route('/resources')
 def resources():
@@ -102,5 +106,10 @@ def resources():
 def emergency():
     return render_template("emergency.html")
 
+@app.route('/download/<filename>', methods=["GET", "POST")
+def download(file_path, filename):
+    return send_from_directory(file_path, 
+                               filename, 
+                               as_attachment=True)
 
 
