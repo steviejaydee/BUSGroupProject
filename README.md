@@ -1,2 +1,2 @@
-# BUSGroupProject
-BUS group project for code sharing and contribution
+# Post-Login Landing Page
+Menu page leading to online/offline resources, meditation guides, triage form, emergency information

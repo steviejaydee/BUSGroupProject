@@ -27,6 +27,7 @@ def index():
     if not validtime():
         flash('Your session has expired. Please log in again.')
         return redirect(url_for('login'))
+    flash(f"You have successfully logged in. Your session will be remembered for 1 year.")
     return render_template('index.html', first_name = session.get('first_name', 'Student'))
 
 def validtime():
@@ -75,3 +76,20 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('login'))
+
+@app.route('/triage')
+def triage():
+    pass
+
+@app.route('/meditation')
+def meditation():
+    pass
+
+@app.route('/resources')
+def resources():
+    pass
+
+@app.route('/emergency')
+def emergency():
+    pass
+
