@@ -88,7 +88,11 @@ def triage():
 
 @app.route('/meditation')
 def meditation():
-    return render_template("meditation.html")
+    meditations_filepath = os.path.join(current_app.root_path, "static", "meditations")
+    soundscapes_filepath = os.path.join(current_app.root_path, "static", "soundscapes")
+    meditations = os.listdir(meditations_filepath)
+    soundscapes = os.listdir(soundscapes_filepath)
+    return render_template("meditation.html", meditations = meditations, soundscapes = soundscapes)
 
 @app.route('/resources')
 def resources():
@@ -97,5 +101,6 @@ def resources():
 @app.route('/emergency')
 def emergency():
     return render_template("emergency.html")
+
 
 
