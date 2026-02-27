@@ -9,10 +9,10 @@ class TriageForm(FlaskForm):
                   format="%Y-%m-%d", 
                   validators=[DataRequired()])
   problem = TextAreaField("Give a brief description of the problems you are experiencing",  
-                          validators=[DataRequired()], Length(0, 500),)
+                          validators=[DataRequired(), Length(0, 500)])
   type = SelectField("Do you have a preference for the type of help you would like to receive?", 
                      choices=[("none", "No preference"), 
-                              ("councilling", "Councilling"), 
+                              ("counselling", "Counselling"),
                               ("cbt", "Cognitive Behavioural Therapy (CBT)")], 
                      validators=[DataRequired()])
   addon = TextAreaField("Additional Comments", 
