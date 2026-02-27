@@ -1,0 +1,17 @@
+{% extends base.html %}
+
+{% block title %}Triage Form{% endblock %}
+
+{% block content %}
+<h2>Welcome to the UniWell support form for University of Birmingham</h2>
+<p>Please note that this is not an emergency service, if you are experiencing a mental health crisis please contact the services <a href="{{ url_for('emergency') }}">here</a><br>
+<p>Just a few short questions and we'll get you details sent to the mental health support services at UoB</p>
+<form method="POST">
+  {{ form.name.label }}<br>{{ form.name }}<br><br>
+  {{ form.dob.label }}<br>{{ form.dob }}<br><br>
+  {{ form.problem.label }}<br>{{ form.problem }}<br><br>
+  {{ form.type.label }}<br>{{ form.type }}<br><br>
+  {{ form.addon.label }}<br>{{ form.addon }}<br><br>
+  {{ form.submit }}
+</form>
+{% endblock %}
