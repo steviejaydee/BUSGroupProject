@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from app import app
+from app.forms import TriageForm
 from datetime import timedelta
 from datetime import datetime
 import json
@@ -77,19 +78,38 @@ def logout():
     session.clear()
     return redirect(url_for('login'))
 
-@app.route('/triage')
+@app.route('/triage', methods=["GET", "POST")
 def triage():
-    pass
+    form = TriageForm()
+    if form.validate_on_submit():
+        flash(f"Form submitted successfully")
+        return redirect(url_for("index"))
+    return render_template("triage.html", form = form)
 
-@app.route('/meditation')
+@app.route('/meditation', methods=["GET", "POST")
 def meditation():
-    pass
+    meditations_filepath = os.path.join(current_app.root_path, "static", "meditations")
+    soundscapes_filepath = os.path.join(current_app.root_path, "static", "soundscapes")
+    meditations = os.listdir(meditations_filepath)
+    soundscapes = os.listdir(soundscapes_filepath)
+    return render_template("meditation.html", 
+                           meditations = meditations, 
+                           soundscapes = soundscapes, 
+                           meditations_filepath = meditations_filepath, 
+                           soundscapes_filepath = soundscapes_filepath)
 
 @app.route('/resources')
 def resources():
-    pass
+    return render_template("resources.html")
 
 @app.route('/emergency')
 def emergency():
-    pass
+    return render_template("emergency.html")
+
+@app.route('/download/<filename>', methods=["GET", "POST")
+def download(file_path, filename):
+    return send_from_directory(file_path, 
+                               filename, 
+                               as_attachment=True)
+
 

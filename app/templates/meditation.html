@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Meditation Guides{% endblock %}
+
+{% block content %}
+<h1>Meditation</h1>
+<h3>Welcome to the UniWell Meditation page, where you can browse our extensive list of guided meditations and soothing soundscapes</h3>
+<p>Guided Meditations</p>
+<ul>
+  {% if meditations %}
+    {% for meditation in meditations %}
+  <li><a href="{{ url_for('download', file_path=meditations_filepath filename=meditation)" }}>{{ mediation }}</a></li>
+    {% endfor %}
+  {% else %}
+    <li>There are currently no guided meditations lol</li>
+  {% endif %}
+</ul>
+<p>Soundscapes</p>
+<ul>
+  {% if soundscapes %}
+    {% for soundscape in soundscapes %}
+  <li><a href="{{ url_for('download', file_path=soundscapes_filepath, filename=soundscape)" }}>{{ soundscape }}</a></li>
+    {% endfor %}
+  {% else %}
+    <li>There are currently no guided soundscapes lol</li>
+  {% endif %}
+</ul>
+{% endblock %}
