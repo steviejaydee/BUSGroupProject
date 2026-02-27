@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from app import app
+from app.forms import TriageForm
 from datetime import timedelta
 from datetime import datetime
 import json
@@ -79,17 +80,22 @@ def logout():
 
 @app.route('/triage')
 def triage():
-    pass
+    form = TriageForm()
+    if form.validate_on_submit():
+        flash(f"Form submitted successfully")
+        return redirect(url_for("index"))
+    return render_template("triage.html", form = form)
 
 @app.route('/meditation')
 def meditation():
-    pass
+    return render_template("meditation.html")
 
 @app.route('/resources')
 def resources():
-    pass
+    return render_template("resources.html")
 
 @app.route('/emergency')
 def emergency():
-    pass
+    return render_template("emergency.html")
+
 
