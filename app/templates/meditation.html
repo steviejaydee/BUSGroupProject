@@ -9,7 +9,7 @@
 <ul>
   {% if meditations %}
     {% for meditation in meditations %}
-  <li><a href="{{ url_for('download', file_path=meditations_filepath filename=meditation)" }}>{{ mediation }}</a></li>
+  <li><a href="{{ url_for('download', file_path=meditations_filepath, filename=meditation) }}">{{ meditation }}</a></li>
     {% endfor %}
   {% else %}
     <li>There are currently no guided meditations lol</li>
@@ -19,7 +19,7 @@
 <ul>
   {% if soundscapes %}
     {% for soundscape in soundscapes %}
-  <li><a href="{{ url_for('download', file_path=soundscapes_filepath, filename=soundscape)" }}>{{ soundscape }}</a></li>
+  <li><a href="{{ url_for('download', file_path=soundscapes_filepath, filename=soundscape) }}"}>{{ soundscape }}</a></li>
     {% endfor %}
   {% else %}
     <li>There are currently no guided soundscapes lol</li>
