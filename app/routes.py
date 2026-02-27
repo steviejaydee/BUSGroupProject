@@ -36,7 +36,6 @@ def validtime():
     if datetime.now() - lastchecked > Timeout:
         session.clear()
         return False
-    # Refresh the timestamp on each valid request
     session['lastchecked'] = datetime.now().isoformat()
     return True
 
@@ -66,7 +65,7 @@ def login():
             session.permanent = True
             session['email'] = user['email']
             session['first_name'] = user['first_name']
-            session['lastchecked'] = datetime.now().isoformat()
+            session['lastchecked'] = datetime.now().isoformat() # updates the check
             return redirect(url_for('index'))
         #guessing you wanted the else in the post block - los pollos
         else:
