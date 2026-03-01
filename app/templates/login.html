@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
-
 {% block content %}
-    <h2>Student Wellbeing Portal Login [WE STILL NEED A NAME, TO BE DISCUSSED]</h2>
+    <h2>UniWell Login</h2>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -14,7 +12,7 @@
         </ul>
       {% endif %}
     {% endwith %}
-    <div class="card">
+    <div class="card text-align-center">
         <form method="POST" action="{{ url_for('login') }}">
             <label>First Name:</label><br>
             <input type="text" name="first_name" required><br><br>
