@@ -13,6 +13,12 @@ a {
 body {
     background-color: #FBF5EE;
     color: #3F8EFC;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+    min-height: 100vh;
 }
 
 
@@ -22,8 +28,15 @@ body {
     top: 0;
 }
 
+#nav-title {
+    font-weight: 800;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
 #nav-title, #slogan {
     color: #FBF5EE;
+    transition: 0.4s
 }
 
 #nav-title:hover, #slogan:hover {
@@ -60,10 +73,11 @@ body {
     font-size: larger;
     font-weight: 600;
     color: #FBF5EE;
+    transition: 0.4s
 }
 
 .nav-link:hover {
-    font-weight: 900;
+    font-weight: 700;
     color: #0000a5;
 }
 
@@ -76,5 +90,26 @@ body {
     #slogan {
         display: none;
     }
+}
+
+/* ------------------- Footer ---------------------- */
+footer {
+    background-color: #3F8EFC;
+    color: #FBF5EE;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
+
+.footer-item {
+    text-align: center;
+    font-size: 15px;
+}
+
+#copyright {
+    margin-bottom: 0;
 }
 
