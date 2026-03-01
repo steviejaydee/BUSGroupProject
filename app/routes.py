@@ -25,10 +25,10 @@ def init_db():
 def index():
     init_db()
     #Check user is logged in
-    if not validtime():
-        flash('Your session has expired. Please log in again.')
-        return redirect(url_for('login'))
-    flash(f"You have successfully logged in. Your session will be remembered for 1 year.")
+    #if not validtime():
+        #flash('Your session has expired. Please log in again.')
+        #return redirect(url_for('login'))
+    #flash(f"You have successfully logged in. Your session will be remembered for 1 year.")
     return render_template('index.html', first_name = session.get('first_name', 'Student'))
 
 def validtime():
@@ -44,8 +44,8 @@ def validtime():
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     #Sees if user is logged in (directed to homepage  if so)
-    if 'email' in session and validtime():
-        return redirect(url_for('index'))
+    #if 'email' in session and validtime():
+       # return redirect(url_for('index'))
     if request.method == 'POST':
         first_name = request.form.get('first_name')
         email = request.form.get('email')

@@ -1,4 +1,80 @@
-body {
-    background-color: red;
-    font-family: "Roboto", sans-serif;
+h1,h2,h3,h4,h5 {
+    font-family: "Farro", sans-serif;
 }
+
+p {
+    font-family: "Radio Canada", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: #FBF5EE;
+    color: #3F8EFC;
+}
+
+
+/* ------------------- Header ---------------------- */
+.navbar {
+    position: sticky;
+    top: 0;
+}
+
+#nav-title, #slogan {
+    color: #FBF5EE;
+}
+
+#nav-title:hover, #slogan:hover {
+    color: #0000a5
+}
+
+#slogan {
+    padding-left: 35px;
+}
+
+.hidden {
+    display:none;
+}
+
+.navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-container {
+    background-color: #3F8EFC;
+}
+
+.navbar-toggler {
+    color: #FBF5EE;
+    margin-bottom: 5px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(251,245,238,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.nav-link {
+    font-size: larger;
+    font-weight: 600;
+    color: #FBF5EE;
+}
+
+.nav-link:hover {
+    font-weight: 900;
+    color: #0000a5;
+}
+
+/*---------------------------------------------------------------------- Add class to nav links when pages created-------*/
+.nav-link-current {
+    font-weight: 800;
+}
+
+@media only screen and (max-width: 768px) {
+    #slogan {
+        display: none;
+    }
+}
+
