@@ -2,16 +2,25 @@
     {
         "first_name": "Alice",
         "email": "axb3759@bham.ac.uk",
-        "password": "password123"
+        "password": "password123",
+        "role": "student"
     },
     {
         "first_name": "Bob",
         "email": "bxs7290@bham.ac.uk",
-        "password": "securepass"
+        "password": "securepass",
+        "role": "student"
     },
     {
         "first_name": "Charlie",
         "email": "cxp1296@bham.ac.uk",
-        "password": "bham2026"
+        "password": "bham2026",
+        "role": "student"
+    },
+    {
+        "first_name": "admin",
+        "email": "admin@bham.ac.uk",
+        "password": "admin",
+        "role": "admin"
     }
 ]

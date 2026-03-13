@@ -42,8 +42,7 @@
                         <li>
                             <a class="nav-link" href="https://intranet.birmingham.ac.uk/student/your-wellbeing/mental-health/index.aspx" target="_blank">Online Resources</a>
                         </li>
-                        <!-- If statement to determine user sign in status -->
-                        {% if 'email' in session and validtime() %}
+                        {% if 'email' in session %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
                         </li>
