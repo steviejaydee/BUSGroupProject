@@ -96,7 +96,11 @@ def logout():
 
 @app.route('/triage', methods=["GET", "POST"])
 def triage():
-    is_login()
+    try:
+        print(session['first_name'])
+    except KeyError:
+        flash('Please log in')
+        return redirect(url_for('login'))
     form = TriageForm()
     if form.validate_on_submit():
         flash(f"Form submitted successfully")
