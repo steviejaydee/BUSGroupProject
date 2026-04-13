@@ -96,12 +96,17 @@ def logout():
 
 @app.route('/triage', methods=["GET", "POST"])
 def triage():
-    is_login()
+    SFN = session['first_name']
+    try:
+        print(SFN)
+    except KeyError:
+        flash('Please log in')
+        return redirect(url_for('login'))
     form = TriageForm()
     if form.validate_on_submit():
         flash(f"Form submitted successfully")
         return redirect(url_for("index"))
-    return render_template("triage.html", form = form)
+    return render_template("triage.html", form = form, GuestCheck = SFN)
 
 @app.route('/meditation', methods=["GET", "POST"])
 def meditation():
@@ -152,5 +157,11 @@ def download(file_path, filename):
                                filename, 
                                as_attachment=True)
 
-
+@app.route('/guest', methods = ["GET","POST"])
+def guest():
+    session.permanent = True
+    session['email'] = 'guest'
+    session['first_name'] = 'Guest'
+    session['lastchecked'] = datetime.now().isoformat()
+    return redirect(url_for('index'))
 init_db()
