@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Admin View</h1>
+
+    {% if data %}
+        <table>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Password
+                </th>
+                <th>
+                    Role
+                </th>
+                <th>
+                    Edit
+                </th>
+                <th>
+                    Delete
+                </th>
+            </tr>
+            {% for row in data %}
+                <tr>
+                    <td>
+                        {{ loop.index }}
+                        {% set row_id = loop.index %}
+                    </td>
+                    {% for user in row %}
+                   <td>
+                            {{ row[user] }}
+                        </td>
+                    {% endfor %}
+                    <td>
+                        <button><a href="{{ url_for('edit_user', row_id=row_id) }}">Edit</a></button>
+                    </td>
+                    <td>
+                        <button><a href="{{ url_for('delete_user', row_id=row_id) }}">Delete</a></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No data to view</p>
+    {% endif %}
+
+{% endblock %}

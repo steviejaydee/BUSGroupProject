@@ -77,6 +77,11 @@ def login():
             session['email'] = user['email']
             session['first_name'] = first_name
             session['lastchecked'] = datetime.now().isoformat() # updates the check
+
+            # admin check
+            if user['first_name'] == 'admin':
+                return redirect(url_for('admin'))
+
             return redirect(url_for('index'))
         #guessing you wanted the else in the post block - los pollos
         else:
@@ -165,3 +170,73 @@ def guest():
     session['lastchecked'] = datetime.now().isoformat()
     return redirect(url_for('index'))
 init_db()
+
+@app.route('/admin', methods = ["GET","POST"])
+def admin():
+    # are they logged in?
+    try:
+        print(session['first_name'])
+    except KeyError:
+        flash('Please log in')
+        return redirect(url_for('login'))
+
+    # are they admin?
+    if not session['first_name'] == 'admin':
+        return redirect(url_for('index'))
+
+    with open('users.json', 'r') as file:
+        data = json.load(file)
+    return render_template('admin.html', data=data)
+
+@app.route('/edit_user/<int:row_id>', methods = ["GET","POST"])
+def edit_user(row_id):
+    # fix row number
+    row_id -= 1
+
+    # are they logged in?
+    try:
+        print(session['first_name'])
+    except KeyError:
+        flash('Please log in')
+        return redirect(url_for('login'))
+
+    # are they admin?
+    if not session['first_name'] == 'admin':
+        return redirect(url_for('index'))
+
+
+    with open('users.json', 'r') as file:
+        data = json.load(file)
+
+    print('This is the ID: ',data[row_id])
+    return redirect(url_for('admin'))
+
+@app.route('/delete_user/<int:row_id>', methods = ["GET","POST"])
+def delete_user(row_id):
+    # fix row number
+    row_id -= 1
+
+    # are they logged in?
+    try:
+        print(session['first_name'])
+    except KeyError:
+        flash('Please log in')
+        return redirect(url_for('login'))
+
+    # are they admin?
+    if not session['first_name'] == 'admin':
+        return redirect(url_for('index'))
+
+
+    with open('users.json', 'r') as file:
+        data = json.load(file)
+
+    del data[row_id]
+    print(data)
+
+    # Write the data to the file
+    with open('users.json', 'w') as file:
+        # indent=4 makes the file human-readable (pretty-printed)
+        json.dump(data, file, indent=4)
+
+    return redirect(url_for('admin'))
