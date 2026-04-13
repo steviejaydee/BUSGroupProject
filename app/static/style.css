@@ -113,3 +113,19 @@ footer {
     margin-bottom: 0;
 }
 
+/* this if a basic table, you can change if needed */
+
+table {
+  border-collapse: collapse; /* This is the most important part! It removes the ugly double-borders */
+  width: 100%;               /* Optional: Makes the table take up the full width of its container */
+}
+
+th, td {
+  border: 1px solid #dddddd; /* Adds a simple light-gray border */
+  padding: 8px;              /* Gives your text some breathing room */
+  text-align: left;          /* Aligns text to the left (browsers usually center 'th' by default) */
+}
+
+th {
+  background-color: #f2f2f2; /* Adds a very light gray background to the header row so it stands out */
+}
