@@ -18,3 +18,10 @@ class TriageForm(FlaskForm):
   addon = TextAreaField("Additional Comments", 
                         validators=[Length(0, 500)])
   submit = SubmitField("Submit")
+
+class EditUserForm(FlaskForm):
+    first_name = StringField("Name")
+    email = StringField("Email")
+    password = StringField("Password")
+    role = StringField("Role")
+    submit = SubmitField("Submit")

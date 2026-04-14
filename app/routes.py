@@ -1,6 +1,6 @@
 from flask import send_from_directory, render_template, request, redirect, url_for, session, flash, current_app
 from app import app
-from app.forms import TriageForm
+from app.forms import TriageForm, EditUserForm
 from datetime import timedelta
 from datetime import datetime
 import json
@@ -192,24 +192,59 @@ def admin():
 def edit_user(row_id):
     # fix row number
     row_id -= 1
+    # load form to edit on
+    form = EditUserForm()
 
     # are they logged in?
     try:
         print(session['first_name'])
     except KeyError:
-        flash('Please log in')
+        flash('Please log in, edit_user')
         return redirect(url_for('login'))
 
     # are they admin?
     if not session['first_name'] == 'admin':
         return redirect(url_for('index'))
 
-
     with open('users.json', 'r') as file:
         data = json.load(file)
 
+    if form.validate_on_submit():
+        # if left empty then None, if changed then not
+        first_name = form.first_name.data if form.first_name.data else None
+        email = form.email.data if form.email.data else None
+        password = form.password.data if form.password.data else None
+        role = form.role.data if form.role.data else None
+
+        # to iterate over
+        changes_list = [first_name,email,password,role]
+
+        # to keep track of where in our list
+        i = 0
+        for each in changes_list:
+            # if empty, then skips over
+            if each:
+                match i:
+                    case 0:
+                        data[row_id]['first_name'] = each
+                    case 1:
+                        data[row_id]['email'] = each
+                    case 2:
+                        data[row_id]['password'] = each
+                    case 3:
+                        data[row_id]['role'] = each
+            i+=1
+
+        print(f'changes {data[row_id]}')
+        # Write the data to the file
+        with open('users.json', 'w') as file:
+            # indent=4 makes the file human-readable (pretty-printed)
+            json.dump(data, file, indent=4)
+
+        return redirect(url_for('admin'))
+
     print('This is the ID: ',data[row_id])
-    return redirect(url_for('admin'))
+    return render_template('edit_user.html', user_data=data[row_id], form=form)
 
 @app.route('/delete_user/<int:row_id>', methods = ["GET","POST"])
 def delete_user(row_id):
