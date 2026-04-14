@@ -40,27 +40,34 @@ def send_triage_email(data):
     msg = Message(
         subject=f"Triage Request: {data['name']}",
         sender=f'{session['email']}',
-        recipients=["steviedandy68@gmail.com"] #Using stevie's uni email as a placeholder.
+        recipients=["sxd1008@student.bham.ac.uk"] #Using stevie's uni email as a placeholder.
     )
     msg.body = f"Problem: {data['problem']}\nType: {data['type']}\nAdditional: {data['addon']}"
     mail.send(msg)
 
 def sync_pending_forms():
     if not os.path.exists(QUEUE_FILE) or not is_online():
+        print('nope')
         return
 
     with open(QUEUE_FILE, 'r') as f:
         pending = json.load(f)
-
+    successful = 0
     remaining = []
     for item in pending:
         try:
             send_triage_email(item)
+            successful += 1
+            print('sent')
         except Exception:
             remaining.append(item)
 
     with open(QUEUE_FILE, 'w') as f:
         json.dump(remaining, f, indent=4)
+    if successful > 0:
+        flash(f"Success! {successful} saved form(s) have been sent.")
+    if remaining:
+        flash(f"Notice: {len(remaining)} form(s) are still queued due to connection issues.")
 
 @app.route('/')
 def index():
@@ -74,8 +81,7 @@ def index():
     if not validtime():
         flash('Your session has expired. Please log in again.')
         return redirect(url_for('login'))
-    flash(f"You have successfully logged in. Your session will be remembered for 1 year.")
-
+    sync_pending_forms()
     return render_template('index.html', first_name = session['first_name'])
 
 def validtime():
@@ -161,7 +167,12 @@ def triage():
                 save_to_queue(data)
                 flash('Mail service currently unavailiable. Please try again later.')
             return redirect(url_for('index'))
-
+        else:
+            save_to_queue(data)
+            flash('No connection detected, your form will send later when there is a stable connection.')
+            return redirect(url_for('index'))
+    if request.method == 'POST':
+        print(f"Form Errors: {form.errors}")
     return render_template('triage.html', form=form)
 
 def save_to_queue(data):

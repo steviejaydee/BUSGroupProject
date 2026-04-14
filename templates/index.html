@@ -2,6 +2,15 @@
 
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <h1>Welcome, {{ first_name }}!</h1>
     <p>What can we do for you?</p>
     <ul>
