@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Edit User {{user_data['first_name']}}</h1>
+    <h2>Leave blank if <strong>no change</strong> needed.</h2>
+    {% if form %}
+        <form action='' method="post">
+            {{ form.hidden_tag() }}
+            <p>{{ user_data['first_name'] }}</p>
+            <p>
+                {{ form.first_name.label(text='First Name')}}
+                {{ form.first_name }}
+            </p>
+            <br>
+
+            <p>{{ user_data['email'] }}</p>
+            <p>
+                {{ form.email.label(text='Email')}}
+                {{ form.email }}
+            </p>
+            <br>
+
+            <p>{{ user_data['password'] }}</p>
+            <p>
+                {{ form.password.label(text='Password')}}
+                {{ form.password }}
+            </p>
+            <br>
+
+            <p>{{ user_data['role'] }}</p>
+            <p>
+                {{ form.role.label(text='Role')}}
+                {{ form.role }}
+            </p>
+            <br>
+            <p>{{ form.submit() }}</p>
+
+        </form>
+    {% else %}
+        <p>No form to view</p>
+    {% endif %}
+
+{% endblock %}
