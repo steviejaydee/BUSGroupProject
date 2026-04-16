@@ -6,7 +6,6 @@ from app.routes import QUEUE_FILE
 
 @pytest.fixture
 def app():
-    # Pre-test state: Disable CSRF so the automated client can post [cite: 118]
     flask_app.config.update({
         "TESTING": True,
         "WTF_CSRF_ENABLED": False,
