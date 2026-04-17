@@ -1,10 +1,50 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Emergency Resources Contact Details</h2>
-<h3>If you are experiencing a mental health crisis please use the resources below</h3>
-<ul>
-  <li>NHS: 111, option 2</li>
-  <li>Samaritans: 116 123 </li>
-</ul>
+<h4>Emergency Contacts</h4>
+
+<div class="container pt-4">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">UK Emergency Numbers</h5>
+                    <ul>
+                        <li class="pt-4">Emergency only: 999 <i class="fa-solid fa-phone"></i></li>
+                        <li class="pt-4">NHS (Non-Emergency): 111 <i class="fa-solid fa-phone"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Helplines</h5>
+                    <ul>
+                          <li class="pt-4">Samaritans: <i class="fa-solid fa-phone"></i></li>
+                          <li class="pt-4">Mind: 0300 102 1234 <i class="fa-solid fa-phone"></i></li>
+                          <li class="pt-4">LGBT Switchboard: <i class="fa-solid fa-phone"></i></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">University Contacts</h5>
+                    <ul>
+                          <li class="pt-4">Wellbeing: <i class="fa-solid fa-envelope"></i></li>
+                          <li class="pt-4">International Students: 0300 102 1234 <i class="fa-solid fa-envelope"></i></li>
+                          <li class="pt-4">LGBT Switchboard: <i class="fa-solid fa-envelope"></i></li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 {% endblock %}

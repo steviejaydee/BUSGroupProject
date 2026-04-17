@@ -93,7 +93,7 @@ def logout():
     try:
         print(session['first_name'])
     except KeyError:
-        flash('Please log in')
+        flash('You are not logged in')
         return redirect(url_for('login'))
 
     session.clear()
@@ -101,11 +101,11 @@ def logout():
 
 @app.route('/triage', methods=["GET", "POST"])
 def triage():
-    SFN = session['first_name']
     try:
+        SFN = session['first_name']
         print(SFN)
     except KeyError:
-        flash('Please log in')
+        flash('Please log in to access support form')
         return redirect(url_for('login'))
     form = TriageForm()
     if form.validate_on_submit():
@@ -118,7 +118,7 @@ def meditation():
     try:
         print(session['first_name'])
     except KeyError:
-        flash('Please log in')
+        flash('Please log in to access meditation')
         return redirect(url_for('login'))
 
     meditations_filepath = os.path.join(current_app.root_path, "static", "meditations")
@@ -131,23 +131,8 @@ def meditation():
                            meditations_filepath = meditations_filepath, 
                            soundscapes_filepath = soundscapes_filepath)
 
-@app.route('/resources')
-def resources():
-    try:
-        print(session['first_name'])
-    except KeyError:
-        flash('Please log in')
-        return redirect(url_for('login'))
-    return render_template("resources.html")
-
 @app.route('/emergency')
 def emergency():
-    try:
-        print(session['first_name'])
-    except KeyError:
-        flash('Please log in')
-        return redirect(url_for('login'))
-
     return render_template("emergency.html")
 
 @app.route('/download/<filename>', methods=["GET", "POST"])
@@ -155,7 +140,7 @@ def download(file_path, filename):
     try:
         print(session['first_name'])
     except KeyError:
-        flash('Please log in')
+        flash('Please log in to download')
         return redirect(url_for('login'))
 
     return send_from_directory(file_path,

@@ -20,8 +20,8 @@
             <input type="email" name="email" required><br><br>
             <label>Password:</label><br>
             <input type="password" name="password" required><br><br>
-            <button type="submit">Log In</button>
+            <button type="submit" class="btn">Log In</button>
         </form>
     </div>
-    <p><a href="{{ url_for('guest') }}">Login as Guest</a></p>
+    <a href="{{ url_for('guest') }}"><button class="btn" id="my_button">Login as Guest</button></a>
 {% endblock %}
