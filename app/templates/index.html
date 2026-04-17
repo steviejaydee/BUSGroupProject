@@ -4,12 +4,11 @@
 {% block content %}
     <h1>Welcome, {{ first_name }}!</h1>
     <p>What can we do for you?</p>
-    <ul>
+    <ul>{% if first_name != "Guest" %}<li><a href="{{ url_for('triage') }}">Get Support</a></li>{% endif %}
         <li><a href="{{ url_for('meditation') }}">Guided Meditation</a></li>
-        {% if first_name != "Guest" %}<li><a href="{{ url_for('triage') }}">Get Support</a></li>{% endif %}
-        <li><a href="{{ url_for('resources') }}">Browse Offline Help</a></li>
+        <li><a href="{{ url_for('emergency') }}">Emergency Contacts</a></li>
         <li><a href="https://intranet.birmingham.ac.uk/student/your-wellbeing/mental-health/index.aspx" target="_blank">Online Resources</a></li>
-        <li><a href="{{ url_for('emergency') }}">Emergency Resources</a></li>
+
         
     </ul>
 {% endblock %}
