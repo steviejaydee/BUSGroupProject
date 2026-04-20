@@ -121,6 +121,10 @@ ul {
     background-color: #AAF0C1;
 }
 
+.idx {
+    padding: 10px;
+    margin: 30px;
+}
 /* ------------------- Footer ---------------------- */
 footer {
     background-color: #3F8EFC;
@@ -140,6 +144,22 @@ footer {
 
 #copyright {
     margin-bottom: 0;
+}
+
+.github {
+    font-size: smaller;
+    color: #FBF5EE;
+    transition: 0.4s
+}
+
+.github > i {
+    color: #FBF5EE;
+    margin: 5px;
+    transition: 0.4s
+}
+
+.github:hover, .github > i:hover {
+    color: #AAF0C1;
 }
 
 /* this if a basic table, you can change if needed */

@@ -12,9 +12,16 @@
     <script src="https://kit.fontawesome.com/b205b6285d.js" crossorigin="anonymous"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}"
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/favicon_io/favicon-16x16.png">
+    <link rel="icon" sizes="192x192" href="../static/favicon_io/android-chrome-192x192.png">
+    <link rel="icon" sizes="512x512" href="../static/favicon_io/android-chrome-512x512.png">
+    <link rel="icon" href="../favicon_io/" type="image/ico" sizes="48x48">
 </head>
 <body>
-    {% block title%}<title>Default</title>{% endblock %}
+    {% block title%}<title>UniWell</title>{% endblock %}
     <main>
          <!-- HEADER -->
         <nav id="navbar" class="navbar navbar-expand-lg fixed-top bg-body-tertiary my-nav">
@@ -82,7 +89,13 @@
             <!-- Copyright -->
             <div class="row">
                 <div class="col-12 text-center">
-                    <p id="copyright">Built by BUS42 Group 2026</p>
+                    <p id="copyright">Built by BUS42 Group 2026:
+                        <a href="https://github.com/steviejaydee" target="_blank"><span class="github">Stevie<i class ="fa-brands fa-github"></i></span></a>
+                        <a href="https://github.com/GeorgeAmble" target="_blank"><span class="github">George<i class ="fa-brands fa-github"></i></span></a>
+                        <a href="https://github.com/LoremasterGaia" target="_blank"><span class="github">Apollo<i class ="fa-brands fa-github"></i></span></a>
+                        <a href="https://github.com/charlottedinsdale" target="_blank"><span class="github">Charlotte<i class ="fa-brands fa-github"></i></span></a>
+                        <a href="https://github.com/WillowZillla" target="_blank"><span class="github">Willow<i class ="fa-brands fa-github"></i></span></a>
+                    </p>
                 </div>
             </div>
         </div>
