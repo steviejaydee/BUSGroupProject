@@ -119,6 +119,16 @@ ul {
 
 .card {
     background-color: #AAF0C1;
+    color: #0000a5;
+}
+
+.contact-card {
+    transition: 0.4s;
+}
+
+.contact-card:hover{
+    background-color: #6FF29B;
+    color: #FBF5EE;
 }
 
 .idx {
@@ -160,6 +170,15 @@ footer {
 
 .github:hover, .github > i:hover {
     color: #AAF0C1;
+}
+
+i {
+    color: #0000a5;
+    transition: 0.4s
+}
+
+i:hover {
+    color: #3F8EFC;
 }
 
 /* this if a basic table, you can change if needed */
