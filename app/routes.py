@@ -116,30 +116,31 @@ def triage():
         problem = form.problem.data
         therapy_type = form.type.data
         addon = form.addon.data
-        send_email(
-            subject = "Mental Health Support",
-            sender = app.config["ADMINS"][0],
-            recipients = [session['email'], "mhw@contacts.bham.ac.uk"],
-            text_body = render_template(
-                "email/triage_email.txt",
-                name = name,
-                dob = dob,
-                problem = problem,
-                therapy_type = therapy_type,
-                addon = addon
-            ),
-            html_body = render_template(
-                "email/triage_email.html",
-                name = name,
-                dob = dob,
-                problem = problem,
-                therapy_type = therapy_type,
-                addon = addon
+        try:
+            send_email(
+                subject = "Mental Health Support",
+                sender = app.config["ADMINS"][0],
+                recipients = [session['email'], "mhw@contacts.bham.ac.uk"],
+                text_body = render_template(
+                    "email/triage_email.txt",
+                    name = name,
+                    dob = dob,
+                    problem = problem,
+                    therapy_type = therapy_type,
+                    addon = addon
+                ),
+                html_body = render_template(
+                    "email/triage_email.html",
+                    name = name,
+                    dob = dob,
+                    problem = problem,
+                    therapy_type = therapy_type,
+                    addon = addon
+                )
             )
-        )
-
-        flash(f"Form submitted successfully")
-        return redirect(url_for("index"))
+        except ConnectionRefusedError:
+            flash("Connection error: please initiate aiosmtpd server")
+        return redirect(url_for("triage_landing.html", email = session['email']))
     return render_template("triage.html", form = form, GuestCheck = SFN)
 
 @app.route('/meditation', methods=["GET", "POST"])
