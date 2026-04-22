@@ -155,8 +155,7 @@ def meditation():
     meditations_filepath = os.path.join(current_app.root_path, "downloads")
     meditations = os.listdir(meditations_filepath)
     return render_template("meditation.html",
-                           meditations = meditations,
-                           meditations_filepath = meditations_filepath)
+                           meditations = meditations)
 
 @app.route('/emergency')
 def emergency():

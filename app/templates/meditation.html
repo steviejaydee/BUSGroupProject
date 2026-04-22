@@ -6,7 +6,7 @@
 <ul>
   {% if meditations %}
     {% for meditation in meditations %}
-  <li><a href="{{ url_for('download', filepath=meditations_filepath, filename=meditation) }}">{{ meditation }}</a></li>
+  <li><a href="{{ url_for('download', filename=meditation) }}">{{ meditation }}</a></li>
     {% endfor %}
   {% else %}
     <li>There are currently no guided meditations lol</li>
