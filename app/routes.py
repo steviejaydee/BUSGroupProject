@@ -140,7 +140,7 @@ def triage():
             )
         except ConnectionRefusedError:
             flash("Connection error: please initiate aiosmtpd server")
-            return redirect(url_for("triage.html", form = form, GuestCheck = SFN))
+            return redirect(url_for("triage", form = form, GuestCheck = SFN))
         return render_template("triage_landing.html", email = session['email'])
     return render_template("triage.html", form = form, GuestCheck = SFN)
 
