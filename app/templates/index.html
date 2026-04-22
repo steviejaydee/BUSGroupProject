@@ -2,6 +2,15 @@
 
 
 {% block content %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     <h3>Welcome, {{ first_name }}!</h3>
     <h5>What can we do for you?</h5>
     {% if first_name != "Guest" %}<div class="card idx"><h5><a href="{{ url_for('triage') }}">Get Support</a></h5></div>{% endif %}
