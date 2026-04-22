@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Form submitted successfully</h2>
+<p>The Mental Health and Wellbeing team will be in touch within the next few days to confirm they have received your details and discuss your options</p><br>
+<p>We have sent a confirmation email to your email address at {{ email }}</p><br>
+<p>Please do not submit more than one form, if you do not hear from the Wellbeing team you can follow up by sending an email to mhw@contacts.bham.ac.uk</p>
+<p>You can now leave this page safely</p><a href="{{ url_for('index') }}">Return Home</a>
+
+{% endblock %}
