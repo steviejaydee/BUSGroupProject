@@ -152,30 +152,25 @@ def meditation():
         flash('Please log in to access meditation')
         return redirect(url_for('login'))
 
-    meditations_filepath = os.path.join(current_app.root_path, "static", "meditations")
-    soundscapes_filepath = os.path.join(current_app.root_path, "static", "soundscapes")
+    meditations_filepath = os.path.join(current_app.root_path, "downloads")
     meditations = os.listdir(meditations_filepath)
-    soundscapes = os.listdir(soundscapes_filepath)
-    return render_template("meditation.html", 
-                           meditations = meditations, 
-                           soundscapes = soundscapes, 
-                           meditations_filepath = meditations_filepath, 
-                           soundscapes_filepath = soundscapes_filepath)
+    return render_template("meditation.html",
+                           meditations = meditations,
+                           meditations_filepath = meditations_filepath)
 
 @app.route('/emergency')
 def emergency():
     return render_template("emergency.html")
 
-@app.route('/download/<filename>', methods=["GET", "POST"])
-def download(file_path, filename):
+@app.route('/download/<filename>/', methods=["GET", "POST"])
+def download(filename):
     try:
         print(session['first_name'])
     except KeyError:
         flash('Please log in to download')
         return redirect(url_for('login'))
-
-    return send_from_directory(file_path,
-                               filename, 
+    filepath = current_app.config['DOWNLOAD_FOLDER']
+    return send_from_directory(filepath, filename,
                                as_attachment=True)
 
 @app.route('/guest', methods = ["GET","POST"])
