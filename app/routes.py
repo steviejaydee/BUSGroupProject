@@ -110,6 +110,7 @@ def triage():
         return redirect(url_for('login'))
     form = TriageForm()
     if form.validate_on_submit():
+        print("form submitting")
         name = form.name.data
         dob = form.dob.data
         problem = form.problem.data
