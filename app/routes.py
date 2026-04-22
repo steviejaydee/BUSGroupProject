@@ -121,7 +121,7 @@ def triage():
             sender = app.config["ADMINS"][0],
             recipients = [session['email'], "mhw@contacts.bham.ac.uk"],
             text_body = render_template(
-                "triage_email.txt",
+                "email/triage_email.txt",
                 name = name,
                 dob = dob,
                 problem = problem,
@@ -129,7 +129,7 @@ def triage():
                 addon = addon
             ),
             html_body = render_template(
-                "triage_email.html",
+                "email/triage_email.html",
                 name = name,
                 dob = dob,
                 problem = problem,
