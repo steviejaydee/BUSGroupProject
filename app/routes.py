@@ -8,8 +8,8 @@ import json
 import os
 
 mydomains = ("@bham.ac.uk","@student.bham.ac.uk")
-Timeout = timedelta(seconds=10)
-app.permanent_session_lifetime = Timeout #TEMP TEST
+# Timeout = timedelta(seconds=10)
+# app.permanent_session_lifetime = Timeout #TEMP TEST
 
 def init_db():
     #creates json for user database if it does not yet exist
