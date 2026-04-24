@@ -25,7 +25,7 @@ def is_online():
         return False
 
 def init_db():
-    """Initializes the user database with dummy data if it doesn't exist."""
+    """Initialises the user database with dummy data if it doesn't exist."""
     if not os.path.exists('users.json'):
         dummy_users = [
             {"first_name": "Alice", "email": "axb3759@bham.ac.uk", "password": "password123", "role": "student"},
