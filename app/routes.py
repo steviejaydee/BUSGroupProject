@@ -206,22 +206,16 @@ def save_to_queue(data):
 
 @app.route('/meditation')
 def meditation():
-    if 'first_name' not in session:
+    try:
+        print(session['first_name'])
+    except KeyError:
         flash('Please log in to access meditation')
         return redirect(url_for('login'))
 
-    meditations_path = os.path.join(current_app.root_path, "static", "meditations")
-    soundscapes_path = os.path.join(current_app.root_path, "static", "soundscapes")
-    
-    # Ensure directories exist to avoid errors
-    meditations = os.listdir(meditations_path) if os.path.exists(meditations_path) else []
-    soundscapes = os.listdir(soundscapes_path) if os.path.exists(soundscapes_path) else []
-    
-    return render_template("meditation.html", 
-                           meditations=meditations, 
-                           soundscapes=soundscapes, 
-                           meditations_filepath=meditations_path, 
-                           soundscapes_filepath=soundscapes_path)
+    meditations_filepath = os.path.join(current_app.root_path, "downloads")
+    meditations = os.listdir(meditations_filepath)
+    return render_template("meditation.html",
+                           meditations = meditations)
 
 @app.route('/resources')
 def resources():
