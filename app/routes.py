@@ -204,7 +204,7 @@ def save_to_queue(data):
     with open(QUEUE_FILE, 'w') as f:
         json.dump(queue, f, indent=4)
 
-@app.route('/meditation')
+@app.route('/meditation', methods=["GET", "POST"])
 def meditation():
     try:
         print(session['first_name'])
@@ -228,13 +228,16 @@ def resources():
 def emergency():
     return render_template("emergency.html")
 
-@app.route('/download/<filename>', methods=["GET", "POST"])
-def download(file_path, filename):
-    if 'first_name' not in session:
+@app.route('/download/<filename>/', methods=["GET", "POST"])
+def download(filename):
+    try:
+        print(session['first_name'])
+    except KeyError:
         flash('Please log in to download')
         return redirect(url_for('login'))
-
-    return send_from_directory(file_path, filename, as_attachment=True)
+    filepath = current_app.config['DOWNLOAD_FOLDER']
+    return send_from_directory(filepath, filename,
+                               as_attachment=True)
 
 # --- Admin Routes ---
 
