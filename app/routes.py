@@ -1,14 +1,15 @@
 from flask import send_from_directory, render_template, request, redirect, url_for, session, flash, current_app
 from app import app
 from app.forms import TriageForm, EditUserForm
+from app.email import send_email
 from datetime import timedelta
 from datetime import datetime
 import json
 import os
 
 mydomains = ("@bham.ac.uk","@student.bham.ac.uk")
-Timeout = timedelta(seconds=10)
-app.permanent_session_lifetime = Timeout #TEMP TEST
+# Timeout = timedelta(seconds=10)
+# app.permanent_session_lifetime = Timeout #TEMP TEST
 
 def init_db():
     #creates json for user database if it does not yet exist
@@ -109,8 +110,38 @@ def triage():
         return redirect(url_for('login'))
     form = TriageForm()
     if form.validate_on_submit():
-        flash(f"Form submitted successfully")
-        return redirect(url_for("index"))
+        print("form submitting")
+        name = form.name.data
+        dob = form.dob.data
+        problem = form.problem.data
+        therapy_type = form.type.data
+        addon = form.addon.data
+        try:
+            send_email(
+                subject = "Mental Health Support",
+                sender = app.config["ADMINS"][0],
+                recipients = [session['email'], "mhw@contacts.bham.ac.uk"],
+                text_body = render_template(
+                    "email/triage_email.txt",
+                    name = name,
+                    dob = dob,
+                    problem = problem,
+                    therapy_type = therapy_type,
+                    addon = addon
+                ),
+                html_body = render_template(
+                    "email/triage_email.html",
+                    name = name,
+                    dob = dob,
+                    problem = problem,
+                    therapy_type = therapy_type,
+                    addon = addon
+                )
+            )
+        except ConnectionRefusedError:
+            flash("Connection error: please initiate aiosmtpd server")
+            return redirect(url_for("triage", form = form, GuestCheck = SFN))
+        return render_template("triage_landing.html", email = session['email'])
     return render_template("triage.html", form = form, GuestCheck = SFN)
 
 @app.route('/meditation', methods=["GET", "POST"])
@@ -121,30 +152,24 @@ def meditation():
         flash('Please log in to access meditation')
         return redirect(url_for('login'))
 
-    meditations_filepath = os.path.join(current_app.root_path, "static", "meditations")
-    soundscapes_filepath = os.path.join(current_app.root_path, "static", "soundscapes")
+    meditations_filepath = os.path.join(current_app.root_path, "downloads")
     meditations = os.listdir(meditations_filepath)
-    soundscapes = os.listdir(soundscapes_filepath)
-    return render_template("meditation.html", 
-                           meditations = meditations, 
-                           soundscapes = soundscapes, 
-                           meditations_filepath = meditations_filepath, 
-                           soundscapes_filepath = soundscapes_filepath)
+    return render_template("meditation.html",
+                           meditations = meditations)
 
 @app.route('/emergency')
 def emergency():
     return render_template("emergency.html")
 
-@app.route('/download/<filename>', methods=["GET", "POST"])
-def download(file_path, filename):
+@app.route('/download/<filename>/', methods=["GET", "POST"])
+def download(filename):
     try:
         print(session['first_name'])
     except KeyError:
         flash('Please log in to download')
         return redirect(url_for('login'))
-
-    return send_from_directory(file_path,
-                               filename, 
+    filepath = current_app.config['DOWNLOAD_FOLDER']
+    return send_from_directory(filepath, filename,
                                as_attachment=True)
 
 @app.route('/guest', methods = ["GET","POST"])

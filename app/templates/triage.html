@@ -3,10 +3,20 @@
 
 {% block content %}
 {% if GuestCheck != "Guest" %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li style="color: red;">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 <h4>Welcome to the UniWell support form for University of Birmingham</h4>
 <p>Please note that this is not an emergency service, if you are experiencing a mental health crisis please contact the services <a href="{{ url_for('emergency') }}">here</a><br>
 <p>Just a few short questions and we'll get your details sent to the mental health support services at UoB</p>
 <form method="POST">
+    {{ form.hidden_tag() }}
   {{ form.name.label }}<br>{{ form.name }}<br><br>
   {{ form.dob.label }}<br>{{ form.dob }}<br><br>
   {{ form.problem.label }}<br>{{ form.problem }}<br><br>
