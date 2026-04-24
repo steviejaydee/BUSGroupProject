@@ -1,4 +1,5 @@
 import os
+basedir = os.path.abspath(os.path.dirname(__file__)) # links our database file
 
 class Config:
     SECRET_KEY = "secret"
