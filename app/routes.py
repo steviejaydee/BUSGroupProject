@@ -11,14 +11,14 @@ import socket
 QUEUE_FILE = 'pending_triage.json'
 mydomains = ("@bham.ac.uk", "@student.bham.ac.uk")
 
-# Session settings - Set to 1 year as per routes2.py logic
+
 Timeout = timedelta(days=365)
 app.permanent_session_lifetime = Timeout
 
 def is_online():
     """Checks if the server has an active internet connection."""
     try:
-        # Connect to Google's public DNS to check connectivity
+
         socket.create_connection(("8.8.8.8", 53), timeout=2)
         return True
     except OSError:
@@ -42,7 +42,7 @@ def send_triage_email(data):
     msg = Message(
         subject=f"Triage Request: {data['name']}",
         sender=session.get('email', 'noreply@bham.ac.uk'),
-        recipients=["sxd1008@student.bham.ac.uk"] # Placeholder recipient
+        recipients=["sxd1008@student.bham.ac.uk"] 
     )
     msg.body = f"Problem: {data['problem']}\nType: {data['type']}\nAdditional: {data['addon']}"
     mail.send(msg)
