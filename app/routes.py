@@ -187,7 +187,7 @@ def triage():
             save_to_queue(data)
             flash('No connection detected. Your form will be sent when you are online.')
             
-        return redirect(url_for('index'))
+        return render_template("triage_landing.html", email = "sxd1008@student.bham.ac.uk")
         
     return render_template('triage.html', form=form, GuestCheck=session.get('first_name'))
 
